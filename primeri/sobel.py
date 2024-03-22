@@ -34,7 +34,7 @@ def sobel_filter(slika, dtype=np.uint8):
     
 
 if __name__ == "__main__":
-    slika = cv.imread("../.utils/lenna.png")
+    slika = cv.imread(".utils/lenna.png")
     print(slika.shape)
     sobel_1 = sobel_filter(slika,dtype=np.uint8)
     sobel_2 = sobel_filter(slika,dtype=np.float64)

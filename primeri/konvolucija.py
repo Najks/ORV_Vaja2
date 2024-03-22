@@ -2,8 +2,8 @@ import cv2 as cv
 import numpy as np
 
 if __name__ == '__main__':
-    #slika = cv.imread('../.utils/lenna.png')
-    #slika = cv.cvtColor(slika, cv.COLOR_BGR2GRAY)
+    slika = cv.imread('.utils/lenna.png')
+    slika = cv.cvtColor(slika, cv.COLOR_BGR2GRAY)
     
     slike = list()
     slika1 = np.zeros((4, 4), dtype=np.uint8)
