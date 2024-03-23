@@ -39,18 +39,26 @@ def filtriraj_sobel_smer(slika):
     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
     pass
 
-if __name__ == '__main__':    
-    slika3 = np.zeros((4, 4), dtype=np.uint8)
-    slika3[1, 1] = 1
+if __name__ == '__main__':   
+    slika_diagonala = np.zeros((4, 4), dtype=np.uint8)
+    np.fill_diagonal(slika_diagonala, 1)
 
-    slike = [slika3]
+    slika_točke = np.array([[0, 1, 0, 1],
+                            [1, 0, 1, 0],
+                            [0, 1, 0, 1],
+                            [1, 0, 1, 0]], dtype=np.uint8)
+
+    slika_vodoravna = np.zeros((4, 4), dtype=np.uint8)
+    slika_vodoravna[2, :] = 1
+
+    slike = [slika_diagonala, slika_točke, slika_vodoravna]
 
     jedro = np.array([[1, 1, 1],
                       [1, 1, 1],
                       [1, 1, 1]], dtype=np.uint8)
     
-    for slika in slike:
+    for i, slika in enumerate(slike, 1):
         slika_konvolucija = konvolucija(slika, jedro)
-        print("Original:\n", slika)
-        print("Konvolucija:\n", slika_konvolucija)
+        print(f"Primer {i} - Original:\n{slika}\n")
+        print(f"Primer {i} - Konvolucija:\n{slika_konvolucija}\n")
         print("######################")
