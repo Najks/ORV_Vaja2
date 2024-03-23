@@ -57,7 +57,7 @@ def filtriraj_z_gaussovim_jedrom(slika,sigma):
 
     gaussovoJedro = gaussovo_jedro(sigma)
     
-    # Nato uporabimo to jedro v konvolucijski funkciji, da filtriramo vhodno sliko
+    # jedro v konvolucijski funkciji, da filtriramo vhodno sliko
     filtriranaSlika = konvolucija(slika, gaussovoJedro)
     
     return filtriranaSlika
@@ -75,26 +75,27 @@ def filtriraj_sobel_smer(slika):
 
     return barvna_slika
 if __name__ == '__main__':
-    slika_pot = '.utils/lenna.png'  # Posodobite pot do slike
+    slika_pot = '.utils/lenna.png'
     slika = cv2.imread(slika_pot, cv2.IMREAD_GRAYSCALE)
     if slika is None:
         print("Slika ni bila najdena.")
     else:
 
-        # Uporaba Sobelovega filtra
         filtrirana_slika_sobel = filtriraj_sobel_smer(slika)
         cv2.imshow('Originalna Slika', slika)
         cv2.imshow('Filtrirana Slika Sobel', filtrirana_slika_sobel)
-        # Uporaba Gaussovega filtra
-        sigma = 1.0  # Paramter sigma za Gaussov filter
+
+        sigma = 1.0 
         filtrirana_slika_gauss = filtriraj_z_gaussovim_jedrom(slika, sigma)
-        # Ker je filtrirana_slika_gauss v float, jo pretvorimo nazaj v uint8 za prikaz
+        
         filtrirana_slika_gauss = np.clip(filtrirana_slika_gauss, 0, 255).astype(np.uint8)
         cv2.imshow('Filtrirana Slika Gauss', filtrirana_slika_gauss)
 
+        zglajena_sobel = filtriraj_sobel_smer(filtrirana_slika_gauss)
+        cv2.imshow("Filtrirana Slika Sobel po Glajenju", zglajena_sobel)
+
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-
 
     slika_diagonala = np.zeros((4, 4), dtype=np.uint8)
     np.fill_diagonal(slika_diagonala, 1)
