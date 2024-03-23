@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 
 import numpy as np
@@ -63,19 +64,33 @@ def filtriraj_z_gaussovim_jedrom(slika,sigma):
 
 def filtriraj_sobel_smer(slika):
     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
-    sobel_vertikalno = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
+    sobel_vertikalno = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float64)
     #navpicno 0
-    
-    filtriranaSlika = konvolucija(slika, sobel_vertikalno)
-    
-    # Iskanje močnih gradientov in barvanje v modro
-    modraSlika = np.copy(filtriranaSlika)
-    modraSlika[modraSlika > 120] = 255  # modra barva -> najvišjo vrednostjo
+    gradient_vertikalno = konvolucija(slika, sobel_vertikalno)
 
-    return modraSlika
-    pass
+    # Pripravimo barvno sliko za obarvanje močnih gradientov
+    barvna_slika = cv2.cvtColor(slika, cv2.COLOR_GRAY2BGR)
+    
+    # Spremenimo piksle, kjer je gradient večji od 120, v modro barvo
+    barvna_slika[gradient_vertikalno > 120] = [255, 0, 0]  # BGR format
 
-if __name__ == '__main__':   
+    return barvna_slika
+
+if __name__ == '__main__':
+
+    slika = cv2.imread('.utils/lenna.png', cv2.IMREAD_GRAYSCALE)
+    if slika is None:
+        print("Slika ni bila najdena.")
+    else:
+        filtrirana_slika = filtriraj_sobel_smer(slika)
+        
+        # Prikaz originalne in filtrirane slike
+        cv2.imshow('Originalna Slika', slika)
+        cv2.imshow('Filtrirana Slika Sobel', filtrirana_slika)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+
     slika_diagonala = np.zeros((4, 4), dtype=np.uint8)
     np.fill_diagonal(slika_diagonala, 1)
 
@@ -98,3 +113,5 @@ if __name__ == '__main__':
         print(f"Primer {i} - Original:\n{slika}\n")
         print(f"Primer {i} - Konvolucija:\n{slika_konvolucija}\n")
         print("######################")
+
+    
