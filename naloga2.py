@@ -53,7 +53,8 @@ def gaussovo_jedro(sigma):
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
     '''Filtrira sliko z Gaussovim jedrom..'''
-     gaussovoJedro = gaussovo_jedro(sigma)
+
+    gaussovoJedro = gaussovo_jedro(sigma)
     
     # Nato uporabimo to jedro v konvolucijski funkciji, da filtriramo vhodno sliko
     filtriranaSlika = konvolucija(slika, gaussovoJedro)
@@ -62,6 +63,16 @@ def filtriraj_z_gaussovim_jedrom(slika,sigma):
 
 def filtriraj_sobel_smer(slika):
     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
+    sobel_vertikalno = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
+    #navpicno 0
+    
+    filtriranaSlika = konvolucija(slika, sobel_vertikalno)
+    
+    # Iskanje močnih gradientov in barvanje v modro
+    modraSlika = np.copy(filtriranaSlika)
+    modraSlika[modraSlika > 120] = 255  # modra barva -> najvišjo vrednostjo
+
+    return modraSlika
     pass
 
 if __name__ == '__main__':   
