@@ -33,30 +33,32 @@ def konvolucija(vhodna_slika, konvolucijsko_jedro):
 
 def gaussovo_jedro(sigma):
     '''Vrne Gaussovo jedro dano s sigma.'''
-    # Določimo velikost jedra: velikost mora biti nenegativno liho število
+    #liho
     velikost_jedra = int(2 * np.ceil(2 * sigma) + 1)
-    # Središče jedra
+    # središče
     k = velikost_jedra // 2
 
-    # Inicializiramo jedro
     jedro = np.zeros((velikost_jedra, velikost_jedra), dtype=np.float32)
 
-    # Izračunamo vrednosti jedra
     for i in range(velikost_jedra):
         for j in range(velikost_jedra):
             x = i - k
             y = j - k
-            # Uporabimo Gaussovo enačbo
+            # Gaussova enačba
             jedro[i, j] = np.exp(-(x**2 + y**2) / (2 * sigma**2))
 
-    # Normaliziramo jedro, da seštevek vseh vrednosti jedra znaša 1
     jedro /= jedro.sum()
 
     return jedro
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
     '''Filtrira sliko z Gaussovim jedrom..'''
-    pass
+     gaussovoJedro = gaussovo_jedro(sigma)
+    
+    # Nato uporabimo to jedro v konvolucijski funkciji, da filtriramo vhodno sliko
+    filtriranaSlika = konvolucija(slika, gaussovoJedro)
+    
+    return filtriranaSlika
 
 def filtriraj_sobel_smer(slika):
     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
