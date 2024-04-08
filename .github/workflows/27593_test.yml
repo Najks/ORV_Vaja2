@@ -1,0 +1,11 @@
+name: Hello World Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Izpis Hello World
+        run: echo "Hello World!"
