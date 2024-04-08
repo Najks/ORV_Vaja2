@@ -1,11 +1,13 @@
-name: Hello World Test
+name: Primer Joba
 
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Checkout kode
+        uses: actions/checkout@v2
+
       - name: Izpis Hello World
         run: echo "Hello World!"
