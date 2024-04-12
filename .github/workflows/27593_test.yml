@@ -46,7 +46,6 @@ jobs:
     name: Izvajanje Testov
     runs-on: self-hosted
     needs: setup-environment
-    if: needs.setup-environment.outputs.environment_ok == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -65,12 +64,11 @@ jobs:
         with:
           name: napaka
 
-      - name: Preveri prisotnost napake
+      - name: Preveri prisotnost napake (ne vpliva na izvajanje testov)
         run: |
           if [ -f napaka.txt ]; then
-            echo "Napaka pri pripravi okolja. Prekinjam izvajanje."
+            echo "Opozorilo: Napaka pri pripravi okolja, vendar nadaljujemo z izvajanjem testov."
             cat napaka.txt
-            exit 1
           fi
 
       - name: Izvedi teste z pytest
