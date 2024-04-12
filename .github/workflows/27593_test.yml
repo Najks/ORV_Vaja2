@@ -1,13 +1,85 @@
-name: Primer Joba
+name: Testiranje Python Projekta
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout kode
-        uses: actions/checkout@v2
+  setup-environment:
+    name: Priprava Okolja
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10']
+    outputs:
+      environment_ok: ${{ steps.check_error.outputs.success }}
 
-      - name: Izpis Hello World
-        run: echo "Hello World!"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Nastavi Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Namesti pip in Python odvisnosti
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3-pip -y
+          python -m pip install --upgrade pip
+          pip install pytest numpy opencv-python-headless
+
+      - name: Preveri napake in zapiši v napaka.txt
+        id: check_error
+        run: |
+          ! (echo "Preverjanje napak..." && false) > napaka.txt 2>&1 || echo "::set-output name=success::true"
+
+      - name: Shrani napako kot artefakt, če obstaja
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: napaka
+          path: napaka.txt
+
+  run-tests:
+    name: Izvajanje Testov
+    runs-on: self-hosted
+    needs: setup-environment
+    if: needs.setup-environment.outputs.environment_ok == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Nastavi Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Prenesi artefakte
+        uses: actions/download-artifact@v2
+        with:
+          name: napaka
+
+      - name: Preveri prisotnost napake
+        run: |
+          if [ -f napaka.txt ]; then
+            echo "Napaka pri pripravi okolja. Prekinjam izvajanje."
+            cat napaka.txt
+            exit 1
+          fi
+
+      - name: Izvedi teste z pytest
+        run: |
+          pytest testiranje.py --python_version=${{ matrix.python-version }}
+
+      - name: Shrani rezultate testov kot artefakt
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports-${{ matrix.python-version }}
+          path: pytest-results.xml
