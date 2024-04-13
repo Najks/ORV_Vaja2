@@ -82,7 +82,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: ./zapakiraj_27593.sh
+      - name: Nastavi izvršilne pravice
+        run: chmod +x ./zapakiraj_27593.sh
+      - name: Zgradi in potisni Docker sliko
+        run: ./zapakiraj_27593.sh
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
