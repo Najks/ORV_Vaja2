@@ -75,6 +75,8 @@ jobs:
         run: |
             pytest testiranje.py --python_version=${{ matrix.python-version }}
         
+              pytest testiranje.py --python_version=${{ matrix.python-version }}
+
 
       - name: Shrani rezultate testov kot artefakt
         if: always()
