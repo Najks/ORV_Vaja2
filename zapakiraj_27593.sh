@@ -1,10 +1,39 @@
 #!/bin/bash
 
-# Zgradimo Docker sliko
-sudo docker build . --file Dockerfile --tag najks/orv_vaja2:latest
+# Definicija imena in oznake Docker slike
+IMAGE_NAME="yourusername/imagename:tag"
 
-# Avtentificiramo se na Docker Hub
-echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
+# Kreiranje novega direktorija za repozitorij
+REPO_DIR="docker_27593_repo"
+mkdir -p $REPO_DIR
+cd $REPO_DIR
 
-# Potisnemo Docker sliko na Docker Hub
-sudo docker push najks/orv_vaja2:latest
+# Prenos Docker slike
+echo "Prenašanje Docker slike..."
+docker pull $IMAGE_NAME
+
+# Zagon Docker vsebnika
+echo "Zagon Docker vsebnika..."
+docker run -d --name my_app_container $IMAGE_NAME
+
+# Preverjanje, ali vsebnik teče
+if [ "$(docker inspect -f '{{.State.Running}}' my_app_container)" = "true" ]; then
+    echo "Vsebnik se uspešno izvaja."
+else
+    echo "Napaka pri zagonu vsebnika."
+    exit 1
+fi
+
+# Počakaj nekaj sekund, da se vsebnik stabilizira (neobvezno)
+sleep 10
+
+# Očisti: Ustavi in odstrani vsebnik
+echo "Čiščenje..."
+docker stop my_app_container
+docker rm my_app_container
+
+# Izhod iz direktorija in njegova odstranitev
+cd ..
+rmdir $REPO_DIR
+
+echo "Postopek zaključen."
