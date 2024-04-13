@@ -1,7 +1,9 @@
-# test_python_version.py
-import sys
+# conftest.py
 import pytest
 
-def test_python_version():
-    expected_major, expected_minor = map(int, pytest.config.getoption("python_version").split('.'))
-    assert sys.version_info.major == expected_major and sys.version_info.minor == expected_minor, "Python version mismatch"
+def pytest_addoption(parser):
+    parser.addoption("--python_version", action="store", default="3.8", help="Specifies the Python version for the tests")
+
+@pytest.fixture
+def python_version(request):
+    return request.config.getoption("--python_version")
