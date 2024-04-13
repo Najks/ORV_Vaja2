@@ -1,0 +1,180 @@
+[33mcommit 49f30b4cce9c59304bf46d84ce59149ac748f67e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sun Apr 14 00:23:52 2024 +0200
+
+    Popravljen run scripte7
+
+[33mcommit e52bfc9d88dcbeec95063cde1c4e7fbdec4ac96a[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sun Apr 14 00:07:27 2024 +0200
+
+    Popravljen run scripte6
+
+[33mcommit 113ec41595badcb64169672ee90afd19ce46dac3[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:57:23 2024 +0200
+
+    Popravljen run scripte5
+
+[33mcommit 0d9776e790e3d88ec1d2dc6331a26d0a16fb0cac[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:48:05 2024 +0200
+
+    Popravljen run scripte4
+
+[33mcommit e6bd0f90fc96bb62c31b12d748ab6c351a6dfa14[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:41:28 2024 +0200
+
+    Popravljen run scripte3
+
+[33mcommit ac563066ac47dc67037c60935dbf9b9ca2edc908[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:34:50 2024 +0200
+
+    Popravljen run scripte2
+
+[33mcommit d0b5524ab24fced9e0a00c23f4403632da17efe3[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:31:38 2024 +0200
+
+    Popravljen run scripte
+
+[33mcommit 7b9b35783affcde02b28b7d9fbdde7d1ccdc0223[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 23:26:44 2024 +0200
+
+    Dodana skripta za zapakiranje
+
+[33mcommit 3cffcd8971aacf3e5abad298704017b323df2a5d[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 21:20:25 2024 +0200
+
+    fixed dockerfile
+
+[33mcommit f570322b4ae45f4538d8fd08b62cb20b0ffe36ab[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 21:01:46 2024 +0200
+
+    Dodan deploy in Dockerfile
+
+[33mcommit 2262fc1dcfc94f4f929e36f82a9afcdd3463049a[m
+Merge: ace3715 34df49e
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 20:09:41 2024 +0200
+
+    konflikti urejeni!
+
+[33mcommit ace3715ec64f4c9edb2f7a58acea498c775eb011[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 20:05:06 2024 +0200
+
+    Popravljene verzije
+
+[33mcommit 34df49ec53052fee3e8dc04ddaed84dbcc7e4acd[m
+Author: Najks <146822136+Najks@users.noreply.github.com>
+Date:   Sat Apr 13 20:01:25 2024 +0200
+
+    Popravljeno pridobivanje verzije
+
+[33mcommit 3047810b2b8bded74589ca45ec650eae33541108[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Sat Apr 13 19:57:29 2024 +0200
+
+    Popravljeno pridobivanje verzije Pythona
+
+[33mcommit c4429d07a45f3beabf1d3996e2a851e4850c4670[m
+Author: Najks <146822136+Najks@users.noreply.github.com>
+Date:   Fri Apr 12 23:16:55 2024 +0200
+
+    Update 27593_test.yml dodan pytest
+
+[33mcommit ba34f9cbe42cb38f6df98596daa343d2fdbd106c[m
+Author: Najks <146822136+Najks@users.noreply.github.com>
+Date:   Fri Apr 12 23:06:23 2024 +0200
+
+    Update 27593_test.yml
+
+[33mcommit 563dccc426cbf02b0c0034471864a610d7eaeed4[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Fri Apr 12 21:39:44 2024 +0200
+
+    Popravljam yaml
+
+[33mcommit 338e7de7f6e7aaab49b23efe68511b2b927901b5[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Fri Apr 12 21:21:47 2024 +0200
+
+    Dodal testiranje verzij Pythona in konfiguracijo GitHub Actions
+
+[33mcommit 4df3308c1869af2b941966bd4fb9767c5e1035f4[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Mon Apr 8 22:24:23 2024 +0200
+
+    test
+
+[33mcommit a6f92c02707d2b8430483f1c09a69758246c2cd9[m
+Author: vboxuser <vboxuser@Runnerji.myguest.virtualbox.org>
+Date:   Mon Apr 8 22:07:13 2024 +0200
+
+    yaml
+
+[33mcommit a7d208373c7427d1e0d8b1ea2fb657c39026377a[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 22:46:45 2024 +0100
+
+    Dodal primer za poročilo
+
+[33mcommit d1b79ac94140193f790ae0dec14eff795176dc53[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 20:08:15 2024 +0100
+
+    Koda je dokončana
+
+[33mcommit 17441a508187981851f43d2ab992392ecfba1b7c[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 17:52:58 2024 +0100
+
+    popravil sobel, in dodal test
+
+[33mcommit be4658ec4641696e31619bfd94b4884da46ce1e1[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 15:08:03 2024 +0100
+
+    Dodajanje funkcijonalnosti Sobel Vertikalni funkciji
+
+[33mcommit 06d5b7597cf24194f26e058c4d621964a611c84a[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 12:12:50 2024 +0100
+
+    Dodana funkcija za filtriranje s Gaussovim jedrom
+
+[33mcommit 5c1a74670290320f662a48342d1a5f715c924cf2[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 11:58:53 2024 +0100
+
+    dodana funkcija za izracun Gausovega jedra
+
+[33mcommit abd845dc8bf88cc9fcd5f5bbe52e4c0d75f8e494[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Sat Mar 23 10:21:17 2024 +0100
+
+    dodani testi za konvulucijo
+
+[33mcommit a01ea09e5e5db3d130f8c4ab68dd3dafd67f26f4[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Fri Mar 22 20:13:12 2024 +0100
+
+    Dodana funkcija za konvolucijo, pomozna funkcija za 'padding' z 0 in test v mainu po primerih
+
+[33mcommit c7832aa9d649e18ccf716b9a46fab76129f1a334[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Thu Mar 21 20:08:45 2024 +0100
+
+    Added all files
+
+[33mcommit 6521f77873053adbbbacaaf449aba1db33c97287[m
+Author: Najks <nik.damis@gmail.com>
+Date:   Thu Mar 21 20:05:43 2024 +0100
+
+    Initial commit
