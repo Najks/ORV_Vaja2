@@ -27,14 +27,14 @@ jobs:
           sudo apt-get install python3-pip -y
           python -m pip install --upgrade pip
           pip install pytest numpy opencv-python-headless
-          - name: Preveri napake in zapiši v napaka.txt
-          id: check_error
-          run: |
-            if echo "Preverjanje napak..." && false; then
-              echo "::set-output name=success::false"
-            else
-              echo "::set-output name=success::true"
-            fi > napaka.txt 2>&1        
+      - name: Preveri napake in zapiši v napaka.txt
+        id: check_error
+        run: |
+          if echo "Preverjanje napak..." && false; then
+            echo "::set-output name=success::false"
+          else
+            echo "::set-output name=success::true"
+          fi > napaka.txt 2>&1
       - name: Shrani napako kot artefakt, če obstaja
         if: always()
         uses: actions/upload-artifact@v2
@@ -50,7 +50,6 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.7', '3.8', '3.9', '3.10']
-
     steps:
       - uses: actions/checkout@v2
       - name: Nastavi Python
@@ -61,7 +60,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: napaka
-      - name: Preveri prisotnost napake 
+      - name: Preveri prisotnost napake (ne vpliva na izvajanje testov)
         run: |
           if [ -f napaka.txt ]; then
             echo "Opozorilo: Napaka pri pripravi okolja, vendar nadaljujemo z izvajanjem testov."
@@ -79,12 +78,11 @@ jobs:
   deploy:
     name: Deployment
     needs: run-tests
-    runs-on: self-hosted
     if: ${{ needs.run-tests.result == 'success' }}
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Zgradi in potisni Docker sliko
-        run: ./zapakiraj_27593.sh
+      - run: ./zapakiraj_27593.sh
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
