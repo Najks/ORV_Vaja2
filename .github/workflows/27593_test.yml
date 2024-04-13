@@ -27,9 +27,14 @@ jobs:
           sudo apt-get install python3-pip -y
           python -m pip install --upgrade pip
           pip install pytest numpy opencv-python-headless
-      - name: Preveri napake in zapiši v napaka.txt
-        id: check_error
-        run: ! (echo "Preverjanje napak..." && false) > napaka.txt 2>&1 || echo "::set-output name=success::true"
+          - name: Preveri napake in zapiši v napaka.txt
+          id: check_error
+          run: |
+            if echo "Preverjanje napak..." && false; then
+              echo "::set-output name=success::false"
+            else
+              echo "::set-output name=success::true"
+            fi > napaka.txt 2>&1        
       - name: Shrani napako kot artefakt, če obstaja
         if: always()
         uses: actions/upload-artifact@v2
@@ -56,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: napaka
-      - name: Preveri prisotnost napake (ne vpliva na izvajanje testov)
+      - name: Preveri prisotnost napake 
         run: |
           if [ -f napaka.txt ]; then
             echo "Opozorilo: Napaka pri pripravi okolja, vendar nadaljujemo z izvajanjem testov."
