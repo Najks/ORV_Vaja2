@@ -11,7 +11,8 @@ COPY . /app
 RUN apt-get update && \
     apt-get install -y python3-pip && \
     pip install --no-cache-dir --upgrade pip && \
-    pip install pytest numpy opencv-python-headless
+    pip install pytest numpy opencv-python-headless && \
+    rm -rf /var/lib/apt/lists/*  # Čiščenje APT predpomnilnika
 
 # Nastavite ukaz, ki se izvede ob zagonu kontejnerja
 CMD ["python", "./naloga2.py"]
