@@ -1,14 +1,17 @@
-# osnovna slika pythona
+# osnovna slika Pythona
 FROM python:3.8-slim
 
-# nastavim direktorij
+# delovni direktorij v kontejnerju
 WORKDIR /app
 
-# kopiram v zabojnik
+# kopiram vsebino trenutnega direktorija v /app v kontejnerju
 COPY . /app
 
-# potrebne knjiznice
-RUN pip install --no-cache-dir -r requirements.txt
+# Namestim potrebne knjižnice
+RUN apt-get update && \
+    apt-get install -y python3-pip && \
+    pip install --no-cache-dir --upgrade pip && \
+    pip install pytest numpy opencv-python-headless
 
-# ukaz se bo izvedo ob koncu zabojnika
+# Nastavite ukaz, ki se izvede ob zagonu kontejnerja
 CMD ["python", "./naloga2.py"]
