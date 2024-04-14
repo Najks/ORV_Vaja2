@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Nastavi ime Docker slike
-IMAGE_NAME="najks/orv_vaja2:latest"
+# Definiraj ime slike
+IMAGE_NAME="najks/orv_vaja2"
+TAG="2024-04-13-19-24"
 
-# Prenesi Docker sliko
-docker pull $IMAGE_NAME
+# Povleci najnovejšo različico slike
+docker pull $IMAGE_NAME:$TAG
 
-# Zagni Docker vsebnik
-docker run -d --name my_app_container $IMAGE_NAME
+# Zazeni Docker kontejner
+docker run -d --name orv_vaja2_container $IMAGE_NAME:$TAG

@@ -1,12 +1,17 @@
 #!/bin/bash
 
-# Postavimo se v direktorij, kjer se nahaja Dockerfile
-cd /home/vboxuser/ORV_Vaja2
-# Zgradimo Docker sliko
-sudo docker build . --file Dockerfile --tag najks/orv_vaja2:latest
+# Nastavitev poti do Dockerfile
+DOCKERFILE_PATH="/home/vboxuser/ORV_Vaja2/Dockerfile"
 
-# Avtentificiramo se na Docker Hub
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+# Definiraj ime slike
+IMAGE_NAME="najks/orv_vaja2"
+TAG="2024-04-13-19-24"
 
-# Potisnemo Docker sliko na Docker Hub
-sudo docker push najks/orv_vaja2:latest
+# Prijava v DockerHub
+echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
+# Zgradi Docker sliko
+docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME:$TAG .
+
+# Potisni sliko na DockerHub
+docker push $IMAGE_NAME:$TAG

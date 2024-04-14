@@ -75,17 +75,20 @@ jobs:
           name: test-reports-${{ matrix.python-version }}
           path: pytest-results.xml
 
-  deploy:
-    name: Deployment
-    needs: run-tests
-    if: ${{ needs.run-tests.result == 'success' }}
+  build-and-deploy:
+    name: Izgradnja in Namestitev
     runs-on: self-hosted
+    needs: run-tests
+    if: ${{ needs.setup-environment.outputs.environment_ok == 'true' }}
     steps:
       - uses: actions/checkout@v2
-      - name: Nastavi izvršilne pravice
-        run: chmod +x ./zapakiraj_27593.sh
-      - name: Zgradi in potisni Docker sliko
+      - name: Izgradnja Docker Slike
         run: ./zapakiraj_27593.sh
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Namestitev
+        run: ./zazeni_27593.sh
+      - name: Preveri zagon kontejnerja
+        run: |
+          if ! docker ps | grep 'my_container'; then
+            echo "Kontejner ni zagnan!"
+            exit 1
+          fi

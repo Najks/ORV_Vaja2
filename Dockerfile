@@ -8,11 +8,13 @@ WORKDIR /app
 COPY . /app
 
 # Namestim potrebne knjižnice
-RUN apt-get update && \
-    apt-get install -y python3-pip && \
-    pip install --no-cache-dir --upgrade pip && \
-    pip install pytest numpy opencv-python-headless && \
-    rm -rf /var/lib/apt/lists/*  # Čiščenje APT predpomnilnika
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    && pip install --no-cache-dir --upgrade pip \
+    && pip install pytest numpy opencv-python-headless
+
+# Čiščenje apt cache za zmanjšanje velikosti slike
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Nastavite ukaz, ki se izvede ob zagonu kontejnerja
 CMD ["python", "./naloga2.py"]
+
